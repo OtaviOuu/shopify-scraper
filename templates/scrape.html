@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-semibold"> Resultados </h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {% if products %}
+                {% for product in products %}
+                    <div class="bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105">
+                        <img src="{{ product.images }}" alt="{{ product.title }}" class="w-full h-48 object-cover rounded-md mb-4">
+                        <h2 class="text-lg font-semibold text-center">{{ product.title }}</h2>
+                        <p class="text-gray-500 text-center">Editor: {{ product.editor }}</p>
+                        <p class="text-gray-500 text-center">Publicado em: {{ product.published_at }}</p>
+                        <p class="text-xl text-center text-green-600 mt-4">R$ {{ "%.2f"|format(product.price|float) }}</p>
+                        <div class="mt-4 text-center">
+                            <button class="bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-500 transition">
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center text-xl text-gray-700">Nenhum produto encontrado.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-4 mt-8">
+        <div class="container mx-auto text-center">
+        </div>
+    </footer>
+
+</body>
+</html>

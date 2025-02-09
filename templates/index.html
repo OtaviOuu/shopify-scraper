@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Inicial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Container -->
+    <div class="flex justify-center items-center min-h-screen">
+
+        <!-- Formulário -->
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+
+            <!-- Título -->
+            <h2 class="text-2xl font-semibold text-center text-blue-600 mb-6">Iniciar Scraping</h2>
+
+            <!-- Formulário -->
+            <form action="/scrape" method="post">
+                <div class="mb-4">
+                    <label for="store_name" class="block text-gray-700 font-semibold mb-2">Nome da Loja</label>
+                    <input type="text" name="store_name" id="store_name" placeholder="Digite o nome da loja"
+                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600" required>
+                </div>
+
+                <div class="mb-6">
+                    <label for="site_url" class="block text-gray-700 font-semibold mb-2">URL do Site</label>
+                    <input type="url" name="site_url" id="site_url" placeholder="Digite o link do site"
+                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600" required>
+                </div>
+
+                <!-- Botão de Enviar -->
+                <div class="flex justify-center">
+                    <button type="submit"
+                        class="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        Iniciar Scraping
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
