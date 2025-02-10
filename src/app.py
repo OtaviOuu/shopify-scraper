@@ -1,6 +1,8 @@
 from spider import ShopiFyHandler
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -23,3 +25,10 @@ async def scrape_website(
         "scrape.html",
         {"request": request, "products": products, "store_name": store_name},
     )
+
+
+@app.exception_handler(StarletteHTTPException)
+async def custom_404_handler(request: Request, exc: StarletteHTTPException):
+    if exc.status_code == 404:
+        return RedirectResponse(url="/home")
+    raise exc  # Se for outro erro, mantém o comportamento normal
