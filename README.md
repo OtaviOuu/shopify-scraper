@@ -2,7 +2,8 @@
 
 
 
-https://github.com/user-attachments/assets/2d840b89-b6e9-4dd2-b64f-442d4caaa5d5
+![github](https://github.com/user-attachments/assets/d1aa3a3b-b569-4ec9-92fe-6e969c8efe64)
+
 
 ## Tecnologias Utilizadas
 - **FastAPI** - Framework para construir APIs em Python
