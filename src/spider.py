@@ -25,7 +25,6 @@ class ShopiFyHandler:
                     "images": product["image"]["src"],
                 }
                 self.results.append(book_data)
-                # await self.save_in_disk(book_data)
             else:
                 print(f"Error: {response.status}")
 

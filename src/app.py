@@ -21,5 +21,6 @@ async def scrape_website(
     products = await shopify.collect()
 
     return templates.TemplateResponse(
-        "scrape.html", {"request": request, "products": products}
+        "scrape.html",
+        {"request": request, "products": products, "store_name": store_name},
     )

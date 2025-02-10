@@ -5,18 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>  <!-- CDN para xlsx -->
 </head>
 <body class="bg-gray-100 font-sans">
 
     <!-- Header -->
     <header class="bg-blue-600 text-white py-4">
         <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-semibold"> Resultados </h1>
+            <h1 class="text-4xl font-semibold">Resultados</h1>
         </div>
     </header>
 
     <!-- Main Content -->
     <div class="container mx-auto py-8">
+        <div class="flex justify-center space-x-4 mb-8">
+            <button id="json-btn" class="bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-500 transition">
+                Salvar como JSON
+            </button>
+            <button id="excel-btn" class="bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-500 transition">
+                Salvar como Excel
+            </button>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {% if products %}
                 {% for product in products %}
@@ -44,6 +53,38 @@
         <div class="container mx-auto text-center">
         </div>
     </footer>
+
+    <script>
+        // Função para salvar como JSON
+        function saveAsJson(products) {
+            const dataStr = JSON.stringify(products, null, 2);  
+            const blob = new Blob([dataStr], { type: 'application/json' });  
+            const link = document.createElement('a');
+            const url = window.URL.createObjectURL(blob);
+            link.href = url;
+            link.download = '{{store_name}}.json';  
+            link.click(); 
+            window.URL.revokeObjectURL(url);  
+        }
+
+        function saveAsExcel(products) {
+            const ws = XLSX.utils.json_to_sheet(products);  
+            const wb = XLSX.utils.book_new();  
+            XLSX.utils.book_append_sheet(wb, ws, 'Produtos');
+
+            XLSX.writeFile(wb, '{{store_name}}.xlsx');
+        }
+
+        document.getElementById('json-btn').addEventListener('click', () => {
+            const products = {{ products | tojson }}; 
+            saveAsJson(products);
+        });
+
+        document.getElementById('excel-btn').addEventListener('click', () => {
+            const products = {{ products | tojson }}; 
+            saveAsExcel(products);  
+        });
+    </script>
 
 </body>
 </html>
