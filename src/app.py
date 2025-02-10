@@ -1,4 +1,3 @@
-from typing import Union
 from spider import ShopiFyHandler
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
